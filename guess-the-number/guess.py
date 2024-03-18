@@ -9,6 +9,22 @@ def guess(x):
             print('Guess again bro, too low')
         elif guess > random_number:
             print('Guess again, too high')
-    print(f'You did it bro, you so real you guessed it, less go {random_number}')
+    print(f"You did it bro, you so real you guessed it, less go {random_number}")
+
+def computer_guess(x):
+    low = 1
+    high = x
+    feedback = ''
+    while feedback != 'c' :
+        if low != high:
+            guess = random.randint(low, high)
+        else:
+            guess = low
+        feedback = input(f'Is {guess} too high (H), too low(L) or correct (C)?').lower()
+        if feedback == 'h':
+            high = guess - 1
+        elif feedback == 'l':
+            low = guess + 1
+    print(f'Yay, the computer guessed the no. {guess} correctly!')
         
-guess(17)
+computer_guess(13)
