@@ -2,6 +2,17 @@ import math
 import time
 from player import HumanPlayer, RandomComputer
 
+winPatterns = [
+    [0, 1, 2],
+    [0, 3, 6],
+    [0, 4, 8],
+    [1, 4, 7],
+    [2, 5, 8],
+    [2, 4, 6],
+    [3, 4, 5],
+    [6, 7, 8]
+]
+
 
 class TicTacToe():
     def __init__(self):
@@ -32,26 +43,33 @@ class TicTacToe():
         return False
 
     def winner(self, square, letter):
-        # check the row
-        row_ind = math.floor(square / 3)
-        row = self.board[row_ind*3:(row_ind+1)*3]
-        # print('row', row)
-        if all([s == letter for s in row]):
-            return True
-        col_ind = square % 3
-        column = [self.board[col_ind+i*3] for i in range(3)]
-        # print('col', column)
-        if all([s == letter for s in column]):
-            return True
-        if square % 2 == 0:
-            diagonal1 = [self.board[i] for i in [0, 4, 8]]
-            # print('diag1', diagonal1)
-            if all([s == letter for s in diagonal1]):
-                return True
-            diagonal2 = [self.board[i] for i in [2, 4, 6]]
-            # print('diag2', diagonal2)
-            if all([s == letter for s in diagonal2]):
-                return True
+        # # check the row
+        # row_ind = math.floor(square / 3)
+        # row = self.board[row_ind*3:(row_ind+1)*3]
+        # # print('row', row)
+        # if all([s == letter for s in row]):
+        #     return True
+        # col_ind = square % 3
+        # column = [self.board[col_ind+i*3] for i in range(3)]
+        # # print('col', column)
+        # if all([s == letter for s in column]):
+        #     return True
+        # if square % 2 == 0:
+        #     diagonal1 = [self.board[i] for i in [0, 4, 8]]
+        #     # print('diag1', diagonal1)
+        #     if all([s == letter for s in diagonal1]):
+        #         return True
+        #     diagonal2 = [self.board[i] for i in [2, 4, 6]]
+        #     # print('diag2', diagonal2)
+        #     if all([s == letter for s in diagonal2]):
+        #         return True
+        for pattern in winPatterns:
+            pos1 = self.board[pattern[0]]
+            pos2 = self.board[pattern[1]]
+            pos3 = self.board[pattern[2]]
+            if pos1 != ' ' and pos2 != ' ' and pos3 != ' ':
+                if pos1 == pos2 and pos2 == pos3:
+                    return True
         return False
 
     def empty_squares(self):
