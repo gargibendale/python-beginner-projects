@@ -1,6 +1,6 @@
 import math
 import time
-from player import HumanPlayer, RandomComputer
+from player import HumanPlayer, RandomComputer, SmartComputerPlayer
 
 winPatterns = [
     [0, 1, 2],
@@ -94,7 +94,7 @@ def play(game, x_player, o_player, print_game=True):
 
 if __name__ == '__main__':
     x_player = HumanPlayer('X')
-    o_player = RandomComputer('O')
+    o_player = SmartComputerPlayer('O')
     t = TicTacToe()
     play(t, x_player, o_player, print_game=True)
 
